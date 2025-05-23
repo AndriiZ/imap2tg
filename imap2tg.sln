@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImapTelegramNotifier", "ImapTelegramNotifier\ImapTelegramNotifier.csproj", "{0B5D9A1B-8EC8-4132-A168-0EE4390D3A59}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImapTelegramNotifier.Tests", "ImapTelegramNotifier.Tests\ImapTelegramNotifier.Tests.csproj", "{0D320452-2229-4A1E-B9D1-85E861E9A5E8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0B5D9A1B-8EC8-4132-A168-0EE4390D3A59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B5D9A1B-8EC8-4132-A168-0EE4390D3A59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B5D9A1B-8EC8-4132-A168-0EE4390D3A59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B5D9A1B-8EC8-4132-A168-0EE4390D3A59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D320452-2229-4A1E-B9D1-85E861E9A5E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D320452-2229-4A1E-B9D1-85E861E9A5E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D320452-2229-4A1E-B9D1-85E861E9A5E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D320452-2229-4A1E-B9D1-85E861E9A5E8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8314FDDB-2E1F-4DB4-9A7B-5B1924A9B02B}
+	EndGlobalSection
+EndGlobal
