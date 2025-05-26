@@ -16,4 +16,10 @@
     <PackageReference Include="Telegram.Bot" Version="22.5.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="alerts.appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

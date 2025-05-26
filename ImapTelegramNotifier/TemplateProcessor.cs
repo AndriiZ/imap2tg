@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using Microsoft.Extensions.FileSystemGlobbing.Internal;
+using System.Globalization;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -233,6 +234,26 @@ namespace ImapTelegramNotifier
                         length = subText.Length - startIndex;
 
                     return subText.Substring(startIndex, length);
+
+                case "REGEX":
+                    // REGEX(input, pattern, groupIndex)
+                    if (args.Length < 2)
+                        throw new ArgumentException("REGEX function requires at least 2 arguments: input, pattern, and optionally groupIndex");
+
+                    var input = args[0] as string;
+                    var pattern = args[1] as string;
+                    var groupIndex = args.Length >= 3 ? Convert.ToInt32(args[2]) : 1;
+
+                    if (input is null)
+                        throw new ArgumentException("REGEX: input must be a string");
+                    if (pattern is null)
+                        throw new ArgumentException("REGEX: pattern must be a string");
+
+                    var match = Regex.Match(input, pattern, RegexOptions.IgnoreCase);
+                    if (match.Success && match.Groups.Count > groupIndex)
+                        return match.Groups[groupIndex].Value;
+                    else
+                        return string.Empty;
 
                 default:
                     throw new ArgumentException($"Unknown function: {functionName}");

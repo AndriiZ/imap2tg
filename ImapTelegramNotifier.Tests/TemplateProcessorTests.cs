@@ -619,6 +619,32 @@ namespace ImapTelegramNotifier.Tests
             Assert.Equal("Hello *John*! Your security code is: 12345", result);
         }
 
+        [Fact]
+        public void Evaluates_RegexExpression_InTemplate_Correctly()
+        {
+            var context = new { username = "User: Alice" };
+
+            string template = "Extracted name: {{REGEX(username, 'User: (\\w+)', 1)}}";
+
+            string result = TemplateProcessor.EvaluateTemplate(template, context);
+
+            Assert.StartsWith("Extracted name:", result);
+
+            string extracted = result.Substring("Extracted name: ".Length).Trim();
+
+            Assert.Equal("Alice", extracted);
+        }
+
+        [Fact]
+        public void Evaluates_RegexExpression_WithDefaultGroupIndex()
+        {
+            string template = "Extracted: {{REGEX('Data=42', 'Data=(\\d+)')}}";
+
+            string result = TemplateProcessor.EvaluateTemplate(template);
+
+            Assert.Equal("Extracted: 42", result);
+        }
+
         // Test helper classes
         private class TestContext
         {

@@ -69,6 +69,11 @@ namespace ImapTelegramNotifier
             // Load configuration
             config = LoadConfiguration(configName);
             programConfig = BuildConfiguration(config);
+            ProgramHelpers.Log("Ignore Patterns: ");
+            foreach (var ignorePattern in programConfig.ignorePatterns)
+            {
+                ProgramHelpers.Log(ignorePattern);
+            }
             messageBuilder = new TgMarkdownMessageBuilder(programConfig.template, programConfig.previewLength);
 
             // Handle Ctrl+C to gracefully exit
@@ -262,6 +267,12 @@ programConfig.useSSL ? SecureSocketOptions.SslOnConnect : SecureSocketOptions.St
                 throw new ArgumentNullException(nameof(programConfig));
             }
 
+            if (TextMatcher.ShouldIgnore(message.Subject, programConfig.ignorePatterns))
+            {
+                ProgramHelpers.Log($"Notification not sent, ignored ({message.Subject})");
+                return;
+            }
+
             var parseMode = ParseMode.MarkdownV2;
             (StringBuilder preview, string rawText) notification = default;
             // Send the notification via Telegram
@@ -340,6 +351,7 @@ programConfig.useSSL ? SecureSocketOptions.SslOnConnect : SecureSocketOptions.St
                     .AddJsonFile(configFile, optional: false, reloadOnChange: true)
                     .AddEnvironmentVariables()
                     .Build();
+            ProgramHelpers.Log($"Config loaded from {configFile}");
 
             // Register a change callback
             ChangeToken.OnChange(
@@ -388,6 +400,8 @@ programConfig.useSSL ? SecureSocketOptions.SslOnConnect : SecureSocketOptions.St
                 var templateConfig = new Template();
                 config.GetSection("template").Bind(templateConfig);
                 programConfig.template = templateConfig;
+                string[] ignorePatterns = config.GetSection("ignorePatterns").Get<string[]>() ?? [];
+                programConfig.ignorePatterns = ignorePatterns;
 
                 // Validate required settings
                 var missingFields = new List<string>();

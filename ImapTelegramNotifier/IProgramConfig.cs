@@ -14,5 +14,6 @@
         public Template? template { get; set; }
         public int previewLength { get; set; } = 1024;
         public bool sendRawTextAsAttachment { get; set; } = true;
+        public string[] ignorePatterns { get; set; } = [];
     }
 }

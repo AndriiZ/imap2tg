@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ImapTelegramNotifier": {
+      "commandName": "Project",
+      "commandLineArgs": "--config alerts"
+    }
+  }
+}

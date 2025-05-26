@@ -1,10 +1,9 @@
 ﻿using System.Text;
 using MimeKit;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace ImapTelegramNotifier
 {
-    internal class TgMarkdownMessageBuilder : IMessageBuilder
+    public class TgMarkdownMessageBuilder : IMessageBuilder
     {
         private readonly Template? template;
         private readonly int previewLength;
